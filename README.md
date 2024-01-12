@@ -1,1 +1,2 @@
-<img width="189" alt="image" src="https://github.com/Bharath1629/Inflation-insight/assets/67285636/e3718984-f49b-4406-b844-d26d0d984b0f">
+# ER Diagram
+<img width="536" alt="image" src="https://github.com/Bharath1629/Inflation-insight/assets/67285636/2ccc5f12-0fc2-45c0-aa08-4ed455495353">
