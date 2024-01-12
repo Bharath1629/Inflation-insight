@@ -2,9 +2,11 @@
 import mysql.connector
 from mysql.connector import Error
 import csv
-from crud_operations import *
-from user_operations import authenticate_user
-from menu import display_menu, handle_menu_choice
+from admin_crud_operations import *
+from admin_operations import authenticate_user
+from menu_for_admin import display_menu, handle_menu_choice
+from menu_for_user import *
+from login_page import *
 
 # def create_database(cursor):
 #     try:
@@ -52,16 +54,16 @@ from menu import display_menu, handle_menu_choice
 #     conn.commit()
 #     print("Tables created successfully.")
 #
-def load_data_from_csv(conn, csv_path, table_name):
-    cursor = conn.cursor()
-    with open(csv_path, 'r') as file:
-        reader = csv.reader(file)
-        next(reader)  # Skip header row
-        for row in reader:
-            placeholders = ', '.join(['%s' for _ in row])
-            cursor.execute(f'INSERT INTO {table_name} VALUES ({placeholders})', row)
-    conn.commit()
-    print(f"Data loaded into '{table_name}' table successfully.")
+# def load_data_from_csv(conn, csv_path, table_name):
+#     cursor = conn.cursor()
+#     with open(csv_path, 'r') as file:
+#         reader = csv.reader(file)
+#         next(reader)  # Skip header row
+#         for row in reader:
+#             placeholders = ', '.join(['%s' for _ in row])
+#             cursor.execute(f'INSERT INTO {table_name} VALUES ({placeholders})', row)
+#     conn.commit()
+#     print(f"Data loaded into '{table_name}' table successfully.")
 
 def main():
     try:
@@ -73,31 +75,42 @@ def main():
 
         cursor = conn.cursor()
 
-        # Create the database
-        #create_database(cursor)
 
         # Switch to the 'projectinflation' database
         cursor.execute("USE projectinflation;")
 
 #         # Create tables
 #         create_tables(conn)
-#
 #         # Load data from CSV files
 #         load_data_from_csv(conn, 'C:/Users/91630/Desktop/Revature/users.csv', 'users')
 #         load_data_from_csv(conn, 'C:/Users/91630/Desktop/Revature/countries.csv', 'countries')
 #         load_data_from_csv(conn, 'C:/Users/91630/Desktop/Revature/inflation.csv', 'inflation')
+        display_login()
+        choice=input("Enter your choice: ")
+        if choice=='3':
+            new_user_registration(conn,input("Enter username: "),input("Enter password: "))
 
         user = authenticate_user(conn, input("Enter username: "), input("Enter password: "))
 
-        if user:
+        if user['role']=='admin' and choice=='1':
             while True:
                 display_menu()
                 choice = input("Enter your choice: ")
 
-                if choice == '5':
+                if choice == '9':
+                    print("Thanks for your time! See you again!")
                     break
 
-                handle_menu_choice(choice, conn, user)
+                handle_menu_choice(choice, conn)
+        elif user['role']=='user' or choice=='2':
+            while True:
+                display_user_menu()
+                choice=input("Enter your choice: ")
+                if choice=='6':
+                    print("Thanks for your time!")
+                    break
+
+                handle_menu_user_choice(choice, conn)
 
 
     except Error as e:
