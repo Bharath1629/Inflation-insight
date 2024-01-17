@@ -1,4 +1,4 @@
-# crud_operations/crud_operations.py
+# admin_crud_operations.py
 import mysql.connector
 from validation import *
 from tabulate import *
@@ -24,7 +24,7 @@ def view_inflation_data(conn):
         print(tabulate(data_tuples, headers=headers, tablefmt="pretty"))
 
 
-# crud_operations/crud_operations.py
+
 def create_inflation_data(conn):
     country_code = validate_non_empty_input("Enter country code: ").upper()
     year = validate_numeric_input("Enter year: ")

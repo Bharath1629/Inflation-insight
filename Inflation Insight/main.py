@@ -85,32 +85,53 @@ def main():
 #         load_data_from_csv(conn, 'C:/Users/91630/Desktop/Revature/users.csv', 'users')
 #         load_data_from_csv(conn, 'C:/Users/91630/Desktop/Revature/countries.csv', 'countries')
 #         load_data_from_csv(conn, 'C:/Users/91630/Desktop/Revature/inflation.csv', 'inflation')
-        display_login()
-        choice=input("Enter your choice: ")
-        if choice=='3':
-            new_user_registration(conn,input("Enter username: "),input("Enter password: "))
+        while (True):
+            display_login()
+            choice=input("Enter your choice: ")
+            if choice=='1':
+                user = authenticate_user(conn, input("Enter username: "), input("Enter password: "))
+                if not user:
+                    print("Enter valid credentials!")
+                    continue
+                while True:
+                    display_menu()
+                    choice = input("Enter your choice: ")
 
-        user = authenticate_user(conn, input("Enter username: "), input("Enter password: "))
+                    if choice == '9':
+                        print("Thanks for your time! See you again!")
+                        break
 
-        if user['role']=='admin' and choice=='1':
-            while True:
-                display_menu()
-                choice = input("Enter your choice: ")
-
-                if choice == '9':
-                    print("Thanks for your time! See you again!")
-                    break
-
-                handle_menu_choice(choice, conn)
-        elif user['role']=='user' or choice=='2':
-            while True:
-                display_user_menu()
-                choice=input("Enter your choice: ")
-                if choice=='6':
-                    print("Thanks for your time!")
-                    break
-
-                handle_menu_user_choice(choice, conn)
+                    handle_menu_choice(choice, conn)
+                break
+            elif choice=='2':
+                user = authenticate_user(conn, input("Enter username: "), input("Enter password: "))
+                if not user:
+                    print("Enter valid credentials!")
+                    continue
+                while True:
+                    display_user_menu()
+                    choice=input("Enter your choice: ")
+                    if choice=='5':
+                        print("Thanks for your time!")
+                        break
+                    handle_menu_user_choice(choice, conn)
+                break
+            elif choice=='3':
+                new_user_registration(conn,input("Enter username: "),input("Enter password: "))
+                user = authenticate_user(conn, input("Enter username: "), input("Enter password: "))
+                if not user:
+                    print("Enter valid credentials!")
+                    continue
+                while True:
+                    display_user_menu()
+                    choice=input("Enter your choice: ")
+                    if choice=='5':
+                        print("Thanks for your time!")
+                        break
+                    handle_menu_user_choice(choice, conn)
+                break
+            else:
+                print("Please, Enter valid number!")
 
 
     except Error as e:

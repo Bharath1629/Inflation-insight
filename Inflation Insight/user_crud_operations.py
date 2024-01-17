@@ -27,33 +27,6 @@ def view_inflation_data(conn):
         print(tabulate(data_tuples, headers=headers, tablefmt="pretty"))
 
 
-def update_inflation_data(conn, country_code, year, new_energy_price, new_food_price, new_headline_price, new_core_price, new_producer_price):
-    query = """
-        UPDATE inflation 
-        SET 
-            energy_consumer_price = %s,
-            food_consumer_price = %s,
-            headline_consumer_price = %s,
-            official_core_consumer_price = %s,
-            producer_price_inflation = %s
-        WHERE 
-            country_code = %s AND 
-            year = %s
-    """
-    data = (
-        new_energy_price,
-        new_food_price,
-        new_headline_price,
-        new_core_price,
-        new_producer_price,
-        country_code,
-        year
-    )
-    with conn.cursor() as cursor:
-        cursor.execute(query, data)
-    conn.commit()
-    print("Inflation data updated successfully.")
-
 def view_country_data(conn):
     query = "SELECT * FROM countries"
 

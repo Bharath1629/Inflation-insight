@@ -1,4 +1,4 @@
-# user_operations.py
+# admin_operations.py
 import mysql.connector
 from mysql.connector import Error
 def authenticate_user(conn, username, password):
@@ -9,7 +9,7 @@ def authenticate_user(conn, username, password):
         cursor.execute(query, data)
         user = cursor.fetchone()
 
-    return user
+    return user if user else None
 def create_user_by_admin(conn,username, password,role):
     try:
         if conn.is_connected():
