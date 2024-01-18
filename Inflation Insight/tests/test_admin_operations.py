@@ -22,7 +22,8 @@ class TestAdminOperations(unittest.TestCase):
         # Replace the following with a real username and password for testing
         username = "user"
         password = "12345"
-        result = authenticate_user(self.conn, username, password)
+        role="user"
+        result = authenticate_user(self.conn, username, password,role)
         self.assertEqual(result, None)
 
 

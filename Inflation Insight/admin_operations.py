@@ -1,11 +1,11 @@
 # admin_operations.py
 import mysql.connector
 from mysql.connector import Error
-def authenticate_user(conn, username, password):
-    query = "SELECT * FROM users WHERE username = %s AND password = %s"
-    data = (username, password)
+def authenticate_user(conn, username, password,role):
+    query = "SELECT * FROM users WHERE username = %s AND password = %s AND role=%s"
+    data = (username, password,role)
 
-    with conn.cursor(dictionary=True) as cursor:
+    with  conn.cursor(dictionary=True) as cursor:
         cursor.execute(query, data)
         user = cursor.fetchone()
 

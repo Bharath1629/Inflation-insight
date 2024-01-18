@@ -37,19 +37,19 @@ class TestInflationCRUDOperations(unittest.TestCase):
 
         # Check if the data was inserted into the database
         with self.conn.cursor(dictionary=True) as cursor:
-            cursor.execute("SELECT * FROM inflation WHERE country_code = 'USA' AND year = 2025")
+            cursor.execute("SELECT * FROM inflation WHERE country_code = 'USA' AND year = 2010")
             result = cursor.fetchone()
             self.assertIsNotNone(result)
 
     def test_update_inflation_data(self):
         # Assuming you have some existing data in the database
         # Redirect user input to provide test data
-        with patch('builtins.input', side_effect=['USA', '2025', '1.5', '2.5', '3.5', '4.5', '5.5']):
+        with patch('builtins.input', side_effect=['USA', '2010', '1.5', '2.5', '3.5', '4.5', '5.5']):
             update_inflation_data(self.conn)
 
         # Check if the data was updated in the database
         with self.conn.cursor(dictionary=True) as cursor:
-            cursor.execute("SELECT * FROM inflation WHERE country_code = 'USA' AND year = 2025")
+            cursor.execute("SELECT * FROM inflation WHERE country_code = 'USA' AND year = 2010")
             result = cursor.fetchone()
             self.assertIsNotNone(result)
             self.assertEqual(result['energy_consumer_price'], 1.5)
@@ -57,12 +57,12 @@ class TestInflationCRUDOperations(unittest.TestCase):
     def test_delete_inflation_data(self):
         # Assuming you have some existing data in the database
         # Redirect user input to provide test data
-        with patch('builtins.input', side_effect=['XXK', '2025']):
-            delete_inflation_data(self.conn, 'XXK', 2025)
+        with patch('builtins.input', side_effect=['USA', '2025']):
+            delete_inflation_data(self.conn, 'USA', '2025')
 
         # Check if the data was deleted from the database
         with self.conn.cursor(dictionary=True) as cursor:
-            cursor.execute("SELECT * FROM inflation WHERE country_code = 'IND' AND year = 2025")
+            cursor.execute("SELECT * FROM inflation WHERE country_code = 'USA' AND year = 2025")
             result = cursor.fetchone()
             self.assertIsNone(result)
 

@@ -89,7 +89,7 @@ def main():
             display_login()
             choice=input("Enter your choice: ")
             if choice=='1':
-                user = authenticate_user(conn, input("Enter username: "), input("Enter password: "))
+                user = authenticate_user(conn, input("Enter username: "), input("Enter password: "),'admin')
                 if not user:
                     print("Enter valid credentials!")
                     continue
@@ -104,7 +104,7 @@ def main():
                     handle_menu_choice(choice, conn)
                 break
             elif choice=='2':
-                user = authenticate_user(conn, input("Enter username: "), input("Enter password: "))
+                user = authenticate_user(conn, input("Enter username: "), input("Enter password: "),'user')
                 if not user:
                     print("Enter valid credentials!")
                     continue
@@ -118,7 +118,7 @@ def main():
                 break
             elif choice=='3':
                 new_user_registration(conn,input("Enter username: "),input("Enter password: "))
-                user = authenticate_user(conn, input("Enter username: "), input("Enter password: "))
+                user = authenticate_user(conn, input("Enter username: "), input("Enter password: "),'user')
                 if not user:
                     print("Enter valid credentials!")
                     continue
