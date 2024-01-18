@@ -7,10 +7,10 @@
  ### 3. Code Editor (VScode/Intellij Idea)
  
 # ER Diagram
-<img width="536" alt="image" src="https://github.com/Bharath1629/Inflation-insight/assets/67285636/2ccc5f12-0fc2-45c0-aa08-4ed455495353">
+<img width="600" alt="image" src="https://github.com/Bharath1629/Inflation-insight/assets/67285636/2ccc5f12-0fc2-45c0-aa08-4ed455495353">
 
 # Architecture Of Project
-<img width="536" alt="Screenshot 2024-01-18 121957" src="https://github.com/Bharath1629/Inflation-insight/assets/67285636/842bb0b1-123d-4d1c-be0a-191bb856f95b">
+<img width="600" alt="Screenshot 2024-01-18 121957" src="https://github.com/Bharath1629/Inflation-insight/assets/67285636/842bb0b1-123d-4d1c-be0a-191bb856f95b">
 
 # Testing Results
 #### By using Pylint, the overall code rated as 7.43/10.
